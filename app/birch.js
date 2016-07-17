@@ -22,8 +22,8 @@ const AuthProvider          = require("./providers/authenticationProvider");
 
 let defaultConfig = require("./config.default.js");
 
-/* ----------- HAZEL ------------- */
-class Hazel {
+/* ----------- BIRCH ------------- */
+class Birch {
 
     constructor(config, StorageProvider) {
         this._server = null;
@@ -86,4 +86,4 @@ class Hazel {
     }
 }
 
-module.exports = Hazel;
+module.exports = Birch;

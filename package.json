@@ -1,18 +1,12 @@
 {
-  "name": "hazel-wiki",
-  "version": "1.1.3",
-  "description": "Fast, simple, Markdown powered wiki knowledge base",
-  "author": "Wade Kallhoff <w@wmk.io>",
-  "contributors": [
-    "Egor Kuryanovich <me@sontan.name> (http://sontan.name)"
-  ],
+  "name": "Birch",
+  "version": "1.0.0",
+  "description": "Fast, simple, Markdown powered knowledge base application based upon Hazel-wiki, by Wade Kallhoff",
+  "author": "Francesco Gallarotti <gallarotti@gmail.com>",
   "license": "GPL-3.0",
-  "repository": "wkallhof/hazel",
-  "homepage": "https://github.com/wkallhof/Hazel",
+  "repository": "gallarotti/Birch",
   "keywords": [
-    "hazel",
-    "hazel-wiki",
-    "wiki",
+    "birch",
     "markdown",
     "knowledge",
     "base"

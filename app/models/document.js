@@ -2,7 +2,7 @@
 
 /**
  * Represents a single document in the
- * Hazel system
+ * Birch system
  */
 class Document {
     constructor() {
