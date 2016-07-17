@@ -39,6 +39,15 @@ class DocumentRepository {
     }
 
     /**
+     * Return a single document that matches the
+     * provided slug
+     */
+    getWithPath(slug, pathToSlug) {
+        var document = _.find(this._documents, { "slug": slug, "path": pathToSlug });
+        return _.clone(document);
+    }
+
+    /**
      * Add a document to the repository
      */
     add(document) {

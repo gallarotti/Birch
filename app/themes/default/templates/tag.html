@@ -55,7 +55,7 @@
                     <ul class="category-posts">
                         <% for(var i = 0; i < taggedDocuments.length; i++){ var document = taggedDocuments[i];%>
                         <li class="list-post pa-post-format">
-                            <i class="fa fa-file-text fa-fw"></i> <a href="<%= document.slug %>"><%= document.title %></a>
+                            <i class="fa fa-file-text fa-fw"></i> <a href="<%= document.getLink() %>"><%= document.title %></a>
                         </li>
                         <% } %>
                     </ul>

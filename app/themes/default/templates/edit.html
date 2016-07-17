@@ -20,7 +20,7 @@
 </div>
 
 <!-- CONTENT -->
-<div class="container wrap main-section js-editPage" id="wrap-main-section" data-slug="<%= document.slug %>">
+<div class="container wrap main-section js-editPage" id="wrap-main-section" data-slug="<%= document.getLink() %>">
     <div id="content" class="content">
         <div class="row">
             <form action="<%= document.slug %>/save" method="POST">

@@ -46,6 +46,36 @@ class StorageProvider {
             if (!document) return null;
 
             document.slug = slug;
+            document.searchID = slug;
+            if (!document.title) {
+                document.title = this.slugToTitle(slug);
+            }
+
+            return document;
+        } catch (e) {
+            // error finding file, return null
+            console.log("Tried to open file: " + slug + " as markdown. ");
+            return null;
+        }
+    }
+
+    /**
+     * Handles reading in a document.
+     */
+    readDocumentInDir(slug, dir) {
+        if (!slug) return null;
+        dir = dir.replace(this._config.content_dir, "");
+        let filePath = path.join(this._config.content_dir, dir, slug + ".md");
+
+        // try to read the file on disk
+        try {
+            let fileContent = fs.readFileSync(filePath, "utf8");
+            let document = this._parser.getDocumentFromFileContent(fileContent);
+            if (!document) return null;
+
+            document.slug = slug;
+            document.path = dir;
+            document.searchID = dir + "/" + slug;
             if (!document.title) {
                 document.title = this.slugToTitle(slug);
             }
@@ -60,7 +90,7 @@ class StorageProvider {
 
     /**
      * Handles storing a document.
-     */
+     
     storeDocument(document) {
         let filePath = path.join(this._config.content_dir, document.slug + ".md");
         let fileContent = this._parser.convertDocumentToFileContent(document);
@@ -71,10 +101,11 @@ class StorageProvider {
             console.log("Error writing content to file" + document.slug);
         }
     }
+    */
 
     /**
      * Handles deleting a document.
-     */
+     
     deleteDocument(document) {
         let filePath = path.join(this._config.content_dir, document.slug + ".md");
 
@@ -84,26 +115,46 @@ class StorageProvider {
             console.log("Error deleting file" + document.slug);
         }
     }
+    */
 
     /**
      * Handles getting all documents.
      */
     getAllDocuments() {
         try {
-            let fileNames = fs.readdirSync(this._config.content_dir);
-            let validFiles = _.filter(fileNames, (fileName) => {
-                return fileName.length > 3 && fileName.endsWith(".md");
-            });
-
-            let documents = _.map(validFiles, (fileName) => {
-                return this.readDocument(fileName.replace(".md", ""));
-            });
-
+            var documents = this.walk(this._config.content_dir);
             return documents;
         } catch (e) {
             console.log("Error reading all files");
         }
     }
+
+    walk(dir) {
+        var documents = [];
+        var files = fs.readdirSync(dir);
+        var pending = files.length;
+        if (!pending) return documents;
+        
+        for(var i=0; i<files.length; i++) {
+            var currentFileName = files[i];
+            var currentDir = dir;
+            var currentFile = path.resolve(currentDir, currentFileName);
+            var stat = fs.statSync(currentFile);
+            if (stat.isDirectory()) {
+                var dirDocs = this.walk(currentFile);
+                documents = documents.concat(dirDocs);
+                if (!--pending) return documents;
+            } 
+            if (stat.isFile()){
+                if(currentFileName.length > 3 && currentFileName.endsWith(".md")) {
+                    var currentDocument = this.readDocumentInDir(currentFileName.replace(".md", ""), currentDir);
+                    documents.push(currentDocument);
+                }
+                if (!--pending) return documents;
+            }
+        }
+    }
+
 
     /**
      * Handles storing a object to a file on disk.

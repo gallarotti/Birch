@@ -1,6 +1,7 @@
 "use strict";
 
 const marked = require("marked");
+const path = require["path"];
 const Document = require("../models/document");
 const DetailViewModel = require("../models/detailViewModel");
 // const DocumentRepository = require("../repositories/documentRepository");
@@ -35,6 +36,10 @@ class DocumentController {
         this._server.get("/refresh", this._auth, this.refresh.bind(this));
         // /[slug]
         this._server.get("/:slug", this._auth, this.detail.bind(this));
+        // /[path1]/[slug]
+        this._server.get("/:path1/:slug", this._auth, this.detail.bind(this));
+        // /[path1]/[path2]/[slug]
+        this._server.get("/:path1/:path2/:slug", this._auth, this.detail.bind(this));
         // /upload
         // this._server.post("/upload", this._auth, this.upload.bind(this));
     }
@@ -53,11 +58,23 @@ class DocumentController {
      * GET : Default Request Handler
      */
     detail(req, res, next) {
+
         if (!req.params.slug) { next(); return; }
 
         let viewModel = new DetailViewModel();
         let slug = req.params.slug;
+
         let document = this._documents.get(slug);
+
+        let path1 = req.params.path1;
+        if(path1 && path1.length > 0) {
+            let pathToSlug = path1;
+            let path2 = req.params.path2;
+            if(path2 && path2.length > 0) {
+                pathToSlug = pathToSlug + "/" + path2;
+            }
+            document = this._documents.getWithPath(slug, pathToSlug);
+        }
 
         // check if no content
         if (!document || document.markdown <= 0) { next(); return; }

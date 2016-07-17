@@ -83,7 +83,7 @@
                         <ul class="category-posts">
                             <% for(var i = 0; i < recentDocuments.length; i++){ var document = recentDocuments[i];%>
                                 <li class="list-post pa-post-format">
-                                    <i class="fa fa-file-text fa-fw"></i> <a href="<%= document.slug %>"><%= document.title %></a>
+                                    <i class="fa fa-file-text fa-fw"></i> <a href="<%= document.getLink() %>"><%= document.title %></a>
                                 </li>
                             <% } %>
                         </ul>
@@ -98,7 +98,7 @@
                         <% if(popularDocuments && popularDocuments.length > 0){ %>
                         <ul class="category-posts">
                             <% for(var i = 0; i < popularDocuments.length; i++){ var document = popularDocuments[i];%>
-                                <li class="list-post pa-post-format"><i class="fa fa-file-text"></i> <a href="<%= document.slug %>"><%= document.title %></a></li>
+                                <li class="list-post pa-post-format"><i class="fa fa-file-text"></i> <a href="<%= document.getLink() %>"><%= document.title %></a></li>
                             <% } %>
                         </ul>
                         <% } %>
@@ -112,7 +112,7 @@
                         <% if(randomDocuments && randomDocuments.length > 0){ %>
                         <ul class="category-posts">
                             <% for(var i = 0; i < randomDocuments.length; i++){ var document = randomDocuments[i];%>
-                                <li class="list-post pa-post-format"><i class="fa fa-file-text"></i> <a href="<%= document.slug %>"><%= document.title %></a></li>
+                                <li class="list-post pa-post-format"><i class="fa fa-file-text"></i> <a href="<%= document.getLink() %>"><%= document.title %></a></li>
                             <% } %>
                         </ul>
                         <% } %>

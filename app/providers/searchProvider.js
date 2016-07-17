@@ -45,7 +45,7 @@ class SearchProvider {
             this.field("title", { boost: 10 });
             this.field("markdown");
             this.field("tags", 100);
-            this.ref("slug");
+            this.ref("searchID");
         });
 
         // add documents to the index
@@ -65,7 +65,7 @@ class SearchProvider {
             this.field("title", { boost: 10 });
             this.field("markdown");
             this.field("tags", 100);
-            this.ref("slug");
+            this.ref("searchID");
         });
 
         // add documents to the index
@@ -91,7 +91,7 @@ class SearchProvider {
 
         // map the results to the documents and create excerpts
         return _.chain(results)
-            .map((result) => _.find(this._documents.all(), { "slug": result.ref }))
+            .map((result) => _.find(this._documents.all(), { "searchID": result.ref }))
             .filter((document) => document != null)
             .forEach((document) => {
                 let excerpt = document.markdown.substring(0, this._excerptLength) + " ...";
