@@ -27,6 +27,32 @@ class SearchProvider {
     }
 
     /**
+     * Refresh the initial search index.
+     */
+    refresh(docsRepo, config) {
+		this._documents = docsRepo;
+		this._config = config;
+		this._excerptLength = 300;
+        this._searchTerms = {};
+        this._index = null;
+		
+        this._index = lunr(function() {
+            // Activating out locale supports
+            if (config.lunr_locale) {
+                this.use(lunr[config.lunr_locale]);
+            }
+
+            this.field("title", { boost: 10 });
+            this.field("markdown");
+            this.field("tags", 100);
+            this.ref("slug");
+        });
+
+        // add documents to the index
+        _.forEach(this._documents.all(), (document) => this._index.add(document));
+    }
+	
+    /**
      * Setup the initial search index.
      */
     _setup(config) {

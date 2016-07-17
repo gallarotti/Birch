@@ -15,6 +15,10 @@ class DocumentRepository {
         this._documents = this._storageProvider.getAllDocuments();
     }
 
+	refresh() {
+		this._documents = this._storageProvider.getAllDocuments();
+	}
+
     /**
      * Return all documents in the repository
      */

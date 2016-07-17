@@ -939,13 +939,54 @@ aside .widget h3 {
 
 .toc {
   line-height: 1.4em;
-  font-size: 0.8em;
-  padding: 1.4em 1.6em .8em;
-  margin: 0 0 2em 0;
-  border: solid 1px #f1f1f1;
+  padding: 1.5em 1.5em 1em 0;
   background-color: #f8f8f8;
-  border-radius: 2px;
+  margin-bottom: 2em;
+}
+
+.toc ul li a {
+  text-decoration: none;
+  font-weight: normal;
+  color: #555;
+}
+
+.toc ul li {
   list-style: none;
+}
+
+li.toc-h1 {
+  margin-left: 0;
+  font-size: 1.2em;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+
+li.toc-h2 {
+  margin-left: 1em;
+  font-size: 1.1em;
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
+}
+
+li.toc-h3 {
+  margin-left: 2em;
+  font-size: 1em;
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+
+li.toc-h4 {
+  margin-left: 3em;
+  font-size: 0.9em;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+li.toc-h5 {
+  margin-left: 4em;
+  font-size: 0.8em;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .knowledge-base-row {
@@ -969,7 +1010,7 @@ aside .widget h3 {
   .toc {
     float: right;
     max-width: 40%;
-    margin: 0 0 1em 1.3em;
+    margin: 0 0 1em 1em;
   }
 }
 
@@ -1018,7 +1059,7 @@ body .before-main-wrapper .header-wrapper {
 }
 
 .before-main-wrapper .header-wrapper:after {
-  background-image: url("http://dkemhji6i1k0x.cloudfront.net/000_clients/128725/page/12872515336ztIZ.jpg");
+  background-image: url("/images/bulb.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -1028,9 +1069,11 @@ body .before-main-wrapper .header-wrapper {
   background-attachment: scroll;
 }
 
+/**
 .header-wrapper:before {
-  background-color: rgba(5, 14, 19, 0.55);
+  background-color: rgba(5, 14, 19, 0.15);
 }
+**/
 
 .navbar {
   color: #353535;
@@ -1101,10 +1144,6 @@ a:hover {
 }
 
 .form-control {
-  border-radius: 1px;
-}
-
-.toc {
   border-radius: 1px;
 }
 
@@ -1267,4 +1306,3 @@ h1.page-title {
 
   display: block;
 }
-

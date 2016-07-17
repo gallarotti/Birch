@@ -3,6 +3,7 @@
 const marked = require("marked");
 const Document = require("../models/document");
 const DetailViewModel = require("../models/detailViewModel");
+// const DocumentRepository = require("../repositories/documentRepository");
 const EditViewModel = require("../models/editViewModel");
 const multer = require("multer");
 const _ = require("lodash");
@@ -22,18 +23,30 @@ class DocumentController {
     }
 
     _bindRoutes() {
-         // /[slug]/edit
-        this._server.get("/:slug/edit", this._auth, this.edit.bind(this));
+        // /[slug]/edit
+        // this._server.get("/:slug/edit", this._auth, this.edit.bind(this));
         // /[slug]/delete
-        this._server.get("/:slug/delete", this._auth, this.delete.bind(this));
+        // this._server.get("/:slug/delete", this._auth, this.delete.bind(this));
         // /[slug]/save
-        this._server.post("/:slug/save", this._auth, this.save.bind(this));
+        // this._server.post("/:slug/save", this._auth, this.save.bind(this));
         // /new
-        this._server.get("/new", this._auth, this.new.bind(this));
+        // this._server.get("/new", this._auth, this.new.bind(this));
+        // /refresh
+        this._server.get("/refresh", this._auth, this.refresh.bind(this));
         // /[slug]
         this._server.get("/:slug", this._auth, this.detail.bind(this));
         // /upload
-        this._server.post("/upload", this._auth, this.upload.bind(this));
+        // this._server.post("/upload", this._auth, this.upload.bind(this));
+    }
+
+	/**
+     * GET : Handle refresh request
+     */
+    refresh(req, res, next) {
+        console.log("refreshing documents");
+		this._documents.refresh();
+		this._searchProvider._setup(this._documents, this._config);
+        res.redirect(this._config.base);
     }
 
     /**
@@ -181,14 +194,14 @@ class DocumentController {
                 cb(null, filename);
             }
         });
-         
+
         var uploadimage = multer({ storage: storage }).single("file");
 
         uploadimage(req, res, function(err) {
             if(err) {
                 return res.status(422).send(err);
             }
-            
+
             if ( !req.file.mimetype.startsWith( 'image/' ) ) {
                 return res.status( 422 ).json( {
                     error : 'The uploaded file must be an image'
