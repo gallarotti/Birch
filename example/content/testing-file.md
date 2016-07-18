@@ -7,6 +7,8 @@ Oeten in gaudere, **crura in** se pluvialibus fugientem, Salmaci. Aut canes ipse
 enim! Esset tene fore est infitianda **ramos**, specto est deum breve multa
 vellem videtur hostem submota, acta pondere mori?
 
+![](/uploads/test.png)
+
 1. Fingite terraeque animae adacto fidem moderamine pietas
 2. Colla nivea Crantoris equidem minuente Lycidasque expugnare
 3. Dare conlectus
