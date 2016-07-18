@@ -1123,7 +1123,7 @@ article table {
 }
 
 article table thead th {
-  background-color: #bbb;
+  background-color: #999;
   font-size: 1.25em;
   font-weight: bold;
   padding: 15px 10px 15px 10px;
@@ -1136,9 +1136,26 @@ article table td
   padding: 3px 10px 3px 10px;
 }
 
-article table tr td:first-child {
+article table tr:nth-child(odd) td {
   background-color: #ddd;
+}
+
+article table tr td:first-child {
+  background-color: #ccc;
   font-weight: bold;
+}
+
+article table tr:nth-child(odd) td:first-child {
+  background-color: #bbb;
+  font-weight: bold;
+}
+
+article table tr:hover td {
+  background-color: #A8C3B7;
+}
+
+article table tr:hover td:first-child {
+  background-color: #568C75;
 }
 
 .btn-primary {
