@@ -44,7 +44,19 @@ class DocumentRepository {
      */
     getWithPath(slug, pathToSlug) {
         var document = _.find(this._documents, { "slug": slug, "path": pathToSlug });
-        return _.clone(document);
+        if(document) {
+          return _.clone(document);
+        }
+        else {
+          pathToSlug = pathToSlug.replace("/", "\\");
+          document = _.find(this._documents, { "slug": slug, "path": pathToSlug });
+        }
+        if(document) {
+          return _.clone(document);
+        }
+        else {
+          console.log("Couldn't find document with slug " + slug + " and path " + pathToSlug);
+        }
     }
 
     /**
